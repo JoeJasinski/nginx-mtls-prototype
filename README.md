@@ -6,9 +6,9 @@ cert, such as the Subject or the SAN, such that downstream applications can be a
 the user making the request is trusted by a common CA.
 
 In this example, we create a CA certificate and key pair. We use this CA to sign client 
-and server certificates. The Client certificate has an identity baked into the SAN. 
-In this case, the client identity is `spiffe://www.jazstudios.com/joe`, and the server 
-identity is `spiffe://www.jazstudios.com/server`, and the identities are provided in the SAN.
+and server certificates. The Client certificate has an identity baked into the SAN and is
+used by curl to make requests. In this case, the client identity is `spiffe://www.jazstudios.com/joe`. The server certificate is used as a TLS certificate for Nginx. Its  
+identity is `spiffe://www.jazstudios.com/server`. The identities are provided in the SAN.
 
 Upon a successful request to the Nginx server, where the client has a valid certificate 
 issued by the commonly trusted CA, Nginx will set a bunch of proxy headers that will be 
