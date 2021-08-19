@@ -1,5 +1,7 @@
 # Example of Nginx mTLS integration
 
+## About
+
 This serves as a prototype of how you can use Nginx to create an mTLS connection using 
 TLS certificates. Nginx can also set a header or headers with information from the client 
 cert, such as the Subject or the SAN, such that downstream applications can be assured that
@@ -24,6 +26,12 @@ TLS headers (client certificate, san, etc) as
 
 This example also uses the ngx_http_js_module to parse and format the SAN from the client
 certificate, so the downstream app doesn't need to do this step.
+
+## Why?
+
+This is just an exploration for my own learning. I wanted to create a working example of
+this concept. Thanks to all of the resources in the "Sources" section of this README that
+helped me create this prototype.
 
 ## Requires
 
@@ -81,9 +89,21 @@ Provided some Nginx config examples that served as the basis for this one
 
 
 Provided example and code for Nginx javascript extension
+
 - https://raw.githubusercontent.com/xeioex/njs-examples/master/njs/http/certs/js/x509.js
 
 Answered some questions about field in Certs
+
 - https://stackoverflow.com/questions/5795256/what-is-the-difference-between-the-x-509-v3-extensions-basic-constraints-and-key
 - https://superuser.com/questions/619008/how-to-properly-setup-openssl-ca-to-generate-ssl-client-certificates
 - https://stackoverflow.com/questions/5795256/what-is-the-difference-between-the-x-509-v3-extensions-basic-constraints-and-key
+- https://security.stackexchange.com/questions/24106/which-key-usages-are-required-by-each-key-exchange-method
+- https://medium.com/@yildirimabdrhm/ssl-certificate-purpose-flag-any-purpose-43f9a6004ad6
+- https://www.casesup.com/category/blog/web-services/ssl-certificate-purpose-flag-any-purpose
+
+
+Misc other articles
+
+- https://medium.com/geekculture/mtls-with-nginx-and-nodejs-e3d0980ed950
+- https://smallstep.com/hello-mtls/doc/server/nginx
+- https://kulkarniamit.github.io/whatwhyhow/howto/verify-ssl-tls-certificate-signature.html
