@@ -4,6 +4,12 @@ set -x
 
 echo "Create Client CSR Config File"
 
+# https://stackoverflow.com/questions/5795256/what-is-the-difference-between-the-x-509-v3-extensions-basic-constraints-and-key
+#"Key Usage" defines what can be done with the key contained in the certificate. Examples of usage are: ciphering, signature, signing certificates, signing CRLs.
+#"Basic Constraints" identifies if the subject of certificates is a CA who is allowed to issue child certificates.
+
+
+
 cat << EOF > client.csr.conf
 [req]
 distinguished_name = req_distinguished_name
@@ -15,8 +21,9 @@ prompt = no
 CN = joe2
 
 [v3_req]
+basicConstraints = critical,CA:FALSE
 keyUsage = keyEncipherment, dataEncipherment
-extendedKeyUsage = serverAuth
+extendedKeyUsage = clientAuth
 subjectAltName = @alt_names
 [alt_names]
 URI = spiffe://www.jazstudios.com/joe
@@ -38,6 +45,10 @@ openssl req -text -noout -verify -in client.csr
 
 echo "Create Client Cert Config File"
 
+# We need to set the "clientAuth", to set the "Certificate purpose" to
+# SSL client : Yes
+# The alt_names contain our identity for the client
+
 cat << EOF > client.crt.conf
 [req]
 distinguished_name = req_distinguished_name
@@ -49,8 +60,9 @@ prompt = no
 CN = joe
 
 [v3_req]
-keyUsage = keyEncipherment, dataEncipherment
-extendedKeyUsage = serverAuth
+basicConstraints = critical,CA:FALSE
+keyUsage = keyEncipherment, dataEncipherment, digitalSignature
+extendedKeyUsage = clientAuth
 subjectAltName = @alt_names
 [alt_names]
 URI = spiffe://www.jazstudios.com/joe
@@ -74,7 +86,7 @@ openssl x509 \
 
 echo "View Cert"
 # View Cert
-openssl x509 -in client.crt -text -noout
+openssl x509 -in client.crt -text -noout  -purpose 
 
 echo "Verify Cert matches Key"
 

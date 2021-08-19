@@ -38,6 +38,10 @@ openssl req -text -noout -verify -in server.csr
 
 echo "Create Server Cert Config File"
 
+# We need to set the "serverAuth", to set the "Certificate purpose" to
+# SSL server : Yes
+# The alt_names contain our identity for the server
+
 cat << EOF > server.crt.conf
 [req]
 distinguished_name = req_distinguished_name
@@ -74,7 +78,7 @@ openssl x509 \
 
 echo "View Cert"
 # View Cert
-openssl x509 -in server.crt -text -noout
+openssl x509 -in server.crt -text -noout -purpose
 
 echo "Verify Cert matches Key"
 
@@ -85,4 +89,4 @@ openssl rsa -noout -modulus -in server.key| openssl md5
 echo "Verify CA created Cert"
 
 # verify CA issued the cert
-openssl verify -verbose -CAfile root-ca.crt  server.crt
+openssl verify -verbose -CAfile root-ca.crt  server.crt 

@@ -11,4 +11,4 @@ openssl req \
     -nodes \
     -subj "/CN=jazstudios.com"
 
-openssl x509 -in root-ca.crt -text -noout
+openssl x509 -in root-ca.crt -text -noout -purpose
