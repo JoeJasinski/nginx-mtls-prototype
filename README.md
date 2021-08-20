@@ -20,9 +20,8 @@ A downstream app could consume these headers and automatically authenticate the
 request based on the SAN; the app can trust the value of the SAN because 
 Nginx validated the cert and SAN at the TCP level through mTLS. 
 
-This example is just a dummy example, so there is no downstream app. However, it 
-demonstrates the idea of what is possible. For demonstration purposes, we set the 
-TLS headers (client certificate, san, etc) as
+This example is just a dummy example. However, it  demonstrates the idea of what is 
+possible. For demonstration purposes, we set the TLS headers (client certificate, san, etc) as
 
 This example also uses the ngx_http_js_module to parse and format the SAN from the client
 certificate, so the downstream app doesn't need to do this step.

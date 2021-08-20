@@ -1,0 +1,31 @@
+version: "3.2"
+    
+services:
+  nginx:
+    depends_on:
+      - app
+    image: nginx:1.21
+    restart: always
+    ports:
+      - target: 80
+        published: 8080
+      - target: 443
+        published: 4443
+    volumes:
+      - ./nginx/njs/:/etc/nginx/njs/
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./server.crt:/srv/server.crt:ro
+      - ./server.key:/srv/server.key:ro
+      - ./root-ca.crt:/srv/root-ca.crt:ro
+    
+  app:
+    build:
+      context: ./app/
+      dockerfile: Dockerfile
+    ports:
+      - "8000"
+    volumes:
+      - ./app/:/src/mtls_django/
+    restart: always
+    stdin_open: true
+    tty: true

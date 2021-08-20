@@ -1,0 +1,18 @@
+<html>
+<body>
+    index here
+
+    {% for key, value in request.headers.items %}
+    {{ key }} -- {{ value }}<br>
+    {% endfor %}
+
+    Is Authenticated: {{ user.is_authenticated }}<br>
+
+    User: {{ request.user }}<br>
+
+</body>
+
+
+
+</html>
+
