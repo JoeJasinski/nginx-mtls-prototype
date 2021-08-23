@@ -44,10 +44,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 MIDDLEWARE = [
-    #'django.middleware.security.SecurityMiddleware',
+    'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'mtls_django.auth_backends.MTLSRemoteUserMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',

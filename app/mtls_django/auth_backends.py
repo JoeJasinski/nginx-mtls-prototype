@@ -23,6 +23,8 @@ def stringlist_to_list(mtls_header_sl):
 
 def first_in_list(l):
     try:
+        if isinstance(l, dict):
+            l = {i: l[i] for i in l if i!= 'error'}
         return next(iter(l), None)
     except (TypeError, ) as e:
         logger.warning("get next header: %s", str(e))
@@ -30,10 +32,12 @@ def first_in_list(l):
 
 
 def parse_mtls_header(mtls_header_sl):
+    rvalue = None
     header_value = first_in_list(stringlist_to_list(mtls_header_sl))
     if header_value is not None:
         parsed_url = urlparse(header_value)
-    return parsed_url.path.strip("/")
+        rvalue = parsed_url.path.strip("/")
+    return rvalue
 
 
 class MTLSRemoteUserMiddleware(RemoteUserMiddleware):
@@ -85,3 +89,5 @@ class MTLSBackend(RemoteUserBackend):
     """
     Authenticate against the mTLS header.
     """
+    def authenticate(self, request=None, **credentials):
+        return super().authenticate(request, **credentials)
