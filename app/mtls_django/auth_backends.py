@@ -24,7 +24,7 @@ def stringlist_to_list(mtls_header_sl):
 def first_in_list(l):
     try:
         if isinstance(l, dict):
-            l = {i: l[i] for i in l if i!= 'error'}
+            l = {i: l[i] for i in l if i == 'spiffe://'}
         return next(iter(l), None)
     except (TypeError, ) as e:
         logger.warning("get next header: %s", str(e))
