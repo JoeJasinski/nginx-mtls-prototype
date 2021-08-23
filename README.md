@@ -46,7 +46,7 @@ helped me create this prototype.
 
 ## Run Docker with the cert/keys
 
-    make docker
+    make run
 
 ## Curl the docker container
 
