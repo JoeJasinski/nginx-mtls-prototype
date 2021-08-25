@@ -15,12 +15,17 @@ server:
 	./scripts/create_server.sh
 
 
-certs: root server client
+pkcs12:
+	./scripts/create_pkcs12.sh
+
+
+certs: root server client pkcs12
+
 
 
 clean:
 	rm client.* server.* root-ca.*
 
+
 run:
 	docker-compose up --build
-
