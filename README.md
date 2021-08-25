@@ -2,26 +2,29 @@
 
 ## About
 
-This serves as a prototype of how you can use Nginx to create an mTLS connection using 
-TLS certificates. Nginx can also set a header or headers with information from the client 
-cert, such as the Subject or the SAN, such that downstream applications can be assured that
-the user making the request is trusted by a common CA.
+This serves as a prototype of how you can use Nginx to create an mTLS connection using
+TLS certificates. Nginx can also set a header or headers with information from the client
+cert, such as the Subject or the SAN, such that downstream applications can be assured
+that the user making the request is trusted by a common CA.
 
-In this example, we create a CA certificate and key pair. We use this CA to sign client 
+In this example, we create a CA certificate and key pair. We use this CA to sign client
 and server certificates. The Client certificate has an identity baked into the SAN and is
-used by curl to make requests. In this case, the client identity is `spiffe://www.jazstudios.com/joe`. The server certificate is used as a TLS certificate for Nginx. Its  
-identity is `spiffe://www.jazstudios.com/server`. The identities are provided in the SAN.
+used by curl to make requests. In this case, the client identity is
+`spiffe://www.jazstudios.com/joe`. The server certificate is used as a TLS certificate
+for Nginx. Its identity is `spiffe://www.jazstudios.com/server`. The identities are
+provided in the SAN.
 
-Upon a successful request to the Nginx server, where the client has a valid certificate 
-issued by the commonly trusted CA, Nginx will set a bunch of proxy headers that will be 
-passed to the proxied app. These headers include the client certificate, the value of 
-the client SAN (the identity), and a bunch of other client cert-related headers. 
-A downstream app could consume these headers and automatically authenticate the 
-request based on the SAN; the app can trust the value of the SAN because 
-Nginx validated the cert and SAN at the TCP level through mTLS. 
+Upon a successful request to the Nginx server, where the client has a valid certificate
+issued by the commonly trusted CA, Nginx will set a bunch of proxy headers that will be
+passed to the proxied app. These headers include the client certificate, the value of the
+client SAN (the identity), and a bunch of other client cert-related headers. A downstream
+app could consume these headers and automatically authenticate the request based on the
+SAN; the app can trust the value of the SAN because Nginx validated the cert and SAN at
+the TCP level through mTLS. 
 
-This example is just a dummy example. However, it  demonstrates the idea of what is 
-possible. For demonstration purposes, we set the TLS headers (client certificate, san, etc) as
+This example is just a dummy example. However, it  demonstrates the idea of what is
+possible. For demonstration purposes, we set the TLS headers (client certificate, san,
+etc).
 
 This example also uses the ngx_http_js_module to parse and format the SAN from the client
 certificate, so the downstream app doesn't need to do this step.
@@ -36,6 +39,7 @@ helped me create this prototype.
 
 - make
 - docker
+- docker-compose
 - openssl
 
 ## INSTALL AND USE
