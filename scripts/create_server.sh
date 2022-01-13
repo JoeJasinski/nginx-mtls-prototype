@@ -61,7 +61,7 @@ URI = spiffe://www.jazstudios.com/server
 EOF
 
 
-echo "Create Server CSR File"
+echo "Create Server CRT File"
 
 openssl x509 \
     -req \

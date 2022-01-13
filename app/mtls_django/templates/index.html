@@ -2,11 +2,19 @@
 <body>
     index here
 
+
+    Is Authenticated: 
+    {% if user.is_authenticated %}
+    <div style="color: green; font-weight: bold">{{ user.is_authenticated }}</div>
+    {% else %}
+    <div style="color: red">{{ user.is_authenticated }}</div>
+    {% endif %}
+    <br>
+
     {% for key, value in request.headers.items %}
     {{ key }} -- {{ value }}<br>
     {% endfor %}
 
-    Is Authenticated: {{ user.is_authenticated }}<br>
 
     User: {{ request.user }}<br>
 
