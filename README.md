@@ -20,7 +20,7 @@ passed to the proxied app. These headers include the client certificate, the val
 client SAN (the identity), and a bunch of other client cert-related headers. A downstream
 app could consume these headers and automatically authenticate the request based on the
 SAN; the app can trust the value of the SAN because Nginx validated the cert and SAN at
-the TCP level through mTLS. 
+the TCP level through mTLS.
 
 This example is just a dummy example. However, it  demonstrates the idea of what is
 possible. For demonstration purposes, we set the TLS headers (client certificate, san,
@@ -82,14 +82,13 @@ This curl will fail with a 403 Forbidden:
         --header "Content-Type: application/json" \
         "https://localhost:4443/"
 
-## Sources:
+## Sources
 
 Provided some Nginx config examples that served as the basis for this one
 
- - https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/
- - https://medium.com/geekculture/mtls-with-nginx-and-nodejs-e3d0980ed950
- - https://serversforhackers.com/c/redirect-http-to-https-nginx
-
+- https://fardog.io/blog/2017/12/30/client-side-certificate-authentication-with-nginx/
+- https://medium.com/geekculture/mtls-with-nginx-and-nodejs-e3d0980ed950
+- https://serversforhackers.com/c/redirect-http-to-https-nginx
 
 Provided example and code for Nginx javascript extension
 
@@ -99,14 +98,13 @@ Answered some questions about field in Certs
 
 - https://stackoverflow.com/questions/5795256/what-is-the-difference-between-the-x-509-v3-extensions-basic-constraints-and-key
 - https://superuser.com/questions/619008/how-to-properly-setup-openssl-ca-to-generate-ssl-client-certificates
-- https://stackoverflow.com/questions/5795256/what-is-the-difference-between-the-x-509-v3-extensions-basic-constraints-and-key
 - https://security.stackexchange.com/questions/24106/which-key-usages-are-required-by-each-key-exchange-method
 - https://medium.com/@yildirimabdrhm/ssl-certificate-purpose-flag-any-purpose-43f9a6004ad6
 - https://www.casesup.com/category/blog/web-services/ssl-certificate-purpose-flag-any-purpose
 
-
 Misc other articles
 
-- https://medium.com/geekculture/mtls-with-nginx-and-nodejs-e3d0980ed950
 - https://smallstep.com/hello-mtls/doc/server/nginx
 - https://kulkarniamit.github.io/whatwhyhow/howto/verify-ssl-tls-certificate-signature.html
+- https://www.golinuxcloud.com/openssl-subject-alternative-name/
+- https://geekflare.com/openssl-commands-certificates/
